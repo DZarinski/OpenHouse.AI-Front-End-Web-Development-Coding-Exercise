@@ -1,11 +1,13 @@
 import {
   Heading,
   SimpleGrid,
+  Spinner,
+  Text,
   VStack,
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { useMemo } from "react";
-import { CommunityCard, PageWrapper } from "../components";
+import { CommunityCard, ErrorAlert, PageWrapper } from "../components";
 import { useAverageHomePrices, useFetchCommunities } from "../hooks";
 
 export const Communities = () => {
@@ -29,15 +31,33 @@ export const Communities = () => {
     <PageWrapper>
       <VStack spacing="30">
         <Heading size="xl">Choose a community</Heading>
-        <SimpleGrid columns={columns} w="100%" spacing="10">
-          {sortedCommunities?.map((community) => (
-            <CommunityCard
-              key={community.id}
-              community={community}
-              averageHomePrice={averageHomePrices.get(community.id)}
-            />
+        {communities.isLoading && <Spinner mt="10" size="xl" />}
+        {communities.isError && (
+          <ErrorAlert
+            title="Oops!"
+            description="There was a problem loading the communities."
+            onRetry={() => communities.refetch()}
+          />
+        )}
+        {communities.isSuccess &&
+          sortedCommunities &&
+          (sortedCommunities.length === 0 ? (
+            <Text>
+              No communities are currently available. Please check back later.
+            </Text>
+          ) : (
+            <SimpleGrid columns={columns} w="100%" spacing="10">
+              {sortedCommunities.map((community) => (
+                <CommunityCard
+                  key={community.id}
+                  name={community.name}
+                  group={community.group}
+                  imgUrl={community.imgUrl}
+                  averageHomePrice={averageHomePrices.get(community.id)}
+                />
+              ))}
+            </SimpleGrid>
           ))}
-        </SimpleGrid>
       </VStack>
     </PageWrapper>
   );
