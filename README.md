@@ -1,5 +1,47 @@
 # OpenHouse.AI - Front End Web Development Coding Exercise
 
+## Images
+
+This section provides a visual overview of the application in various states and themes.
+
+### Light Mode
+
+<img src="./assets/LightMode.jpg" alt="Light Mode" width="100%">
+
+### Dark Mode
+
+<img src="./assets/DarkMode.jpg" alt="Dark Mode" width="100%">
+
+### Mobile View
+
+<img src="./assets/Mobile.jpg" alt="Mobile View" height="500">
+
+### Loading State
+
+<img src="./assets/Loading.jpg" alt="Loading State" width="750px">
+
+### Error State
+
+<img src="./assets/Error.jpg" alt="Error State" width="750px">
+
+### No Communities
+
+<img src="./assets/NoCommunities.jpg" alt="No Communities" width="750px">
+
+## Future Improvements
+
+With more time dedicated to this project, several enhancements could be made to elevate the application's quality and user experience:
+
+1. **Enhanced UI Components**: Focus on refining UI components for a more polished look.
+
+2. **Interactive Community Features**: Expand the functionality to make communities interactable. Introduce features like clickable community names that lead to detailed pages, showing all the homes in the community.
+
+3. **Advanced Data Visualization**: Given more data, implement advanced tools for dynamic data representation. This could involve more detailed statistics about communities, presented in an engaging and easily digestible format.
+
+4. **Map Integration for Communities**: Develop a map view feature for a more immersive user experience. This would allow users to visually explore communities and their corresponding homes, enhancing the interactivity.
+
+# Installation and Setup Instructions
+
 This project was bootstrapped with
 [Create React App](https://github.com/facebook/create-react-app).
 
