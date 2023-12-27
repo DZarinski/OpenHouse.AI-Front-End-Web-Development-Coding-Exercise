@@ -19,18 +19,22 @@ export const CommunityCard = ({
 }: CommunityProps) => {
   const textColor = "white";
   const boxShadowColor = useColorModeValue(
-    "rgba(0, 0, 0, 0.1) 0px 10px 20px",
-    "rgba(255, 255, 255, 0.1) 0px 10px 20px"
+    "rgba(0, 0, 0, 0.25) 0px 10px 20px",
+    "rgba(255, 255, 255, 0.15) 0px 10px 20px"
   );
+  const hoverBorderColor = useColorModeValue("gray.600", "gray.300");
 
   return (
     <Box
       overflow="hidden"
       rounded="xl"
       position="relative"
+      border="1px transparent solid"
       _hover={{
         boxShadow: boxShadowColor,
         cursor: "pointer",
+        border: "1px solid",
+        borderColor: hoverBorderColor,
       }}
     >
       <AspectRatio ratio={4 / 3} w="100%">
