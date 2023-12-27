@@ -1,4 +1,5 @@
 import {
+  Box,
   Container,
   ContainerProps,
   VStack,
@@ -22,12 +23,14 @@ export const PageWrapper = ({
       backgroundColor={useColorModeValue("gray.50", "gray.900")}
       height="100vh"
     >
-      <ColorModeSwitcher alignSelf="flex-end" mr="5" mt="2" />
+      <Box alignSelf="flex-end">
+        <ColorModeSwitcher mr="5" mt="2" />
+      </Box>
 
       <Container
         maxWidth="7xl"
         px={{ base: "4", md: "8", lg: "12" }}
-        py={{ base: "2", md: "4", lg: "4" }}
+        pb="20"
         {...containerProps}
       >
         {children}
