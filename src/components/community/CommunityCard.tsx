@@ -6,15 +6,18 @@ import {
   VStack,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { CommunityType } from "../../hooks";
 
 type CommunityProps = {
-  community: CommunityType;
+  name: string;
+  group: string;
+  imgUrl: string;
   averageHomePrice?: number;
 };
 
 export const CommunityCard = ({
-  community,
+  name,
+  group,
+  imgUrl,
   averageHomePrice,
 }: CommunityProps) => {
   const textColor = "white";
@@ -39,8 +42,8 @@ export const CommunityCard = ({
     >
       <AspectRatio ratio={4 / 3} w="100%">
         <Image
-          src={community.imgUrl}
-          alt={community.name}
+          src={imgUrl}
+          alt={name}
           objectFit="cover"
           draggable="false"
           fallbackSrc="/fallbackImages/community.jpg"
@@ -58,10 +61,10 @@ export const CommunityCard = ({
         alignItems="center"
       >
         <Text fontSize="xl" fontWeight="bold" color={textColor}>
-          {community.name}
+          {name}
         </Text>
         <Text fontSize="lg" color={textColor}>
-          {community.group}
+          {group}
         </Text>
         {averageHomePrice && (
           <VStack spacing="0">
