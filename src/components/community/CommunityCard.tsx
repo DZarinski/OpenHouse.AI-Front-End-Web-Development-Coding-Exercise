@@ -3,15 +3,20 @@ import {
   Box,
   Image,
   Text,
+  VStack,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { CommunityType } from "../../hooks";
 
 type CommunityProps = {
   community: CommunityType;
+  averageHomePrice?: number;
 };
 
-export const CommunityCard = ({ community }: CommunityProps) => {
+export const CommunityCard = ({
+  community,
+  averageHomePrice,
+}: CommunityProps) => {
   const textColor = "white";
   const boxShadowColor = useColorModeValue(
     "rgba(0, 0, 0, 0.1) 0px 10px 20px",
@@ -54,6 +59,21 @@ export const CommunityCard = ({ community }: CommunityProps) => {
         <Text fontSize="lg" color={textColor}>
           {community.group}
         </Text>
+        {averageHomePrice && (
+          <VStack spacing="0">
+            <Text fontSize="md" color={textColor}>
+              Average Home Price:
+            </Text>
+            <Text fontSize="md" color={textColor}>
+              {new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+              }).format(averageHomePrice)}
+            </Text>
+          </VStack>
+        )}
       </Box>
     </Box>
   );
