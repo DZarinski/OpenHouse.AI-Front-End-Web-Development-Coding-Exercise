@@ -1,39 +1,50 @@
 import { useMemo } from "react";
 import { useFetchHomes } from "../hooks";
 
-type Accumulator = {
+// Define a type for the price accumulator
+type PriceAccumulator = {
   total: number;
   count: number;
 };
 
-type AveragePriceMap = Map<string, number>;
-
 export const useAverageHomePrices = () => {
-  const homes = useFetchHomes();
+  // Fetch home data
+  const homeData = useFetchHomes();
 
   return useMemo(() => {
-    const averagesMap: AveragePriceMap = new Map();
+    // Initialize a map to store average prices per community
+    const averagePricesPerCommunity = new Map<string, number>();
 
-    if (!homes.data) return averagesMap;
+    // If there's no home data, return the empty map
+    if (!homeData.data) return averagePricesPerCommunity;
 
-    let pricesMap = new Map<string, Accumulator>();
+    // Initialize a map to store total prices and counts per community
+    const communityTotals = new Map<string, PriceAccumulator>();
 
-    homes.data.forEach((home) => {
+    // Iterate over the home data
+    homeData.data.forEach((home) => {
       const { communityId, price } = home;
-      let communityData = pricesMap.get(communityId);
+      const currentCommunityData = communityTotals.get(communityId);
 
-      if (!communityData) {
-        pricesMap.set(communityId, { total: price, count: 1 });
+      // If this is the first home in this community, initialize the accumulator
+      if (!currentCommunityData) {
+        communityTotals.set(communityId, {
+          total: price,
+          count: 1,
+        });
       } else {
-        communityData.total += price;
-        communityData.count += 1;
+        // Otherwise, update the accumulator
+        currentCommunityData.total += price;
+        currentCommunityData.count += 1;
       }
     });
 
-    pricesMap.forEach((value, key) => {
-      averagesMap.set(key, value.total / value.count);
+    // Calculate the average price for each community
+    communityTotals.forEach((value, key) => {
+      averagePricesPerCommunity.set(key, value.total / value.count);
     });
 
-    return averagesMap;
-  }, [homes.data]);
+    // Return the map of average prices
+    return averagePricesPerCommunity;
+  }, [homeData.data]);
 };
